@@ -1,70 +1,36 @@
 #include <emscripten/val.h>
 #include <functional>
 #include <string>
+#include "../node_modules/asm-dom/cpp/asm-dom.hpp"
 
-void render();
-asmdom::VNode* current_view = NULL;
+// APPLICATION HEADERS
+#include "./app/app.hpp"
+#include "./counter/counter.hpp"
+#include "./button/button.hpp"
 
-int i = 1;
+using namespace asmdom;
 
-bool decrease(emscripten::val) {
-  i--;
-  render();
-  return true;
-};
-
-bool increase(emscripten::val) {
-  i++;
-  render();
-  return true;
-};
-
-void render() {
-  asmdom::VNode* new_node = (
-    <div class="root">
-      <a
-        class="button"
-        onclick={decrease}
-      >
-        -
-      </a>
-      {{ std::to_string(i) }}
-      <a
-        class="button"
-        onclick={increase}
-      >
-        +
-      </a>
-
-      <div
-        style="
-          position: absolute;
-          bottom: 8px;
-          font-size: 12px;
-        "
-      >
-        asm-dom-boilerplate
-      </div>
-    </div>
-  );
-
-  current_view = asmdom::patch(current_view, new_node);
-};
+App* buildApp();
 
 int main() {
-  asmdom::Config config;
-  asmdom::init(config);
+    asmdom::Config config;
+    asmdom::init(config);
 
-  current_view = <div class="root" />;
-  asmdom::patch(
-    emscripten::val::global("document").call<emscripten::val>(
-      "getElementById",
-      std::string("root")
-    ),
-    current_view
-  );
+    App* app = buildApp();
+    app->updateView();
 
-  render();
-
-  return 0;
+    return 0;
 };
+
+App* buildApp() {
+    App* app = new App();
+
+    Button* counterBtn = new Button(app, std::string("add counter"), [app] {
+        app->addChild(new Counter(app, 0));
+    });
+
+    app->init();
+    app->addChild(counterBtn);
+
+    return app;
+}
