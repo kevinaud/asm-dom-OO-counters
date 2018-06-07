@@ -7,6 +7,7 @@
 #include "./app/app.hpp"
 #include "./counter/counter.hpp"
 #include "./button/button.hpp"
+#include "./change-detector/change-detector.hpp"
 
 using namespace asmdom;
 
@@ -24,6 +25,7 @@ int main() {
 
 App* buildApp() {
     App* app = new App();
+    ChangeDetector::Instance()->notify(app);
 
     Button* counterBtn = new Button(app, std::string("add counter"), [app] {
         app->add(new Counter(app, 0));
