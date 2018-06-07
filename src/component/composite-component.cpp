@@ -5,7 +5,6 @@ int CompositeComponent::numChildren() {
 }
 
 void CompositeComponent::add(Component* child) {
-    emscripten::val::global("console").call<void>("log", emscripten::val("added"));
     children.push_back(child);
 }
 
