@@ -2,16 +2,16 @@
 
 
 Button::Button(
-    Widget* parent,
-    std::string label,
-    std::function<void()> handler
-) : Widget(parent), label(label), handler(handler) { }
+    Component* parent,
+    string label,
+    function<void()> handler
+) : Component(parent), label(label), handler(handler) { }
 
-void Button::setClickHandler(std::function<void()> handler) {
+void Button::setClickHandler(function<void()> handler) {
     this->handler = handler;
 }
 
-asmdom::VNode* Button::render() {
+VNode* Button::render() {
     return (
         <button onclick={[this](emscripten::val e) -> bool {
             this->handler(); 

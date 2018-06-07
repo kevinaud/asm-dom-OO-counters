@@ -1,21 +1,22 @@
 #include "app.hpp"
 
-App::App() : Widget(NULL) { }
+//App::App() { }
 
 void App::init() {
     current_view = <div class="root" />;
-    asmdom::patch(
+    patch(
         emscripten::val::global("document").call<emscripten::val>(
             "getElementById",
-            std::string("root")
+            string("root")
         ),
         current_view
     );
 }
 
-asmdom::VNode* App::render() {
+VNode* App::render() {
 
-    std::vector<asmdom::VNode*> renderedChildren;
+    //emscripten::val::global("console").call<void>("log", emscripten::val("added"));
+    vector<VNode*> renderedChildren;
 
     for (int i = 0; i < children.size(); i++) {
         renderedChildren.push_back(children[i]->render());
@@ -36,11 +37,8 @@ asmdom::VNode* App::render() {
     );
 }
 
-void App::addChild(Widget* child) {
-    children.push_back(child);
-}
 
 void App::updateView() {
-    asmdom::VNode* new_node = render();
-    current_view = asmdom::patch(current_view, new_node);
+    VNode* new_node = render();
+    current_view = patch(current_view, new_node);
 }

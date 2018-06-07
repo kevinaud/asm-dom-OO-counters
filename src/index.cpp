@@ -26,11 +26,11 @@ App* buildApp() {
     App* app = new App();
 
     Button* counterBtn = new Button(app, std::string("add counter"), [app] {
-        app->addChild(new Counter(app, 0));
+        app->add(new Counter(app, 0));
     });
 
     app->init();
-    app->addChild(counterBtn);
+    app->add(counterBtn);
 
     return app;
 }

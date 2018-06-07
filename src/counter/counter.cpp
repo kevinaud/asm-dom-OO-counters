@@ -1,10 +1,10 @@
 #include "counter.hpp"
 
-Counter::Counter(Widget* parent, int initValue) : Widget(parent) {
+Counter::Counter(Component* parent, int initValue) : Component(parent) {
     count = initValue;
 }
 
-asmdom::VNode* Counter::render() {
+VNode* Counter::render() {
 
     return (
         <div>
@@ -16,7 +16,7 @@ asmdom::VNode* Counter::render() {
                - 
             </a>
 
-            <span>{{ std::to_string(this->count) }}</span>
+            <span>{{ to_string(this->count) }}</span>
 
             <a class="button" onclick={[this](emscripten::val e) -> bool {
                 this->increase(); 

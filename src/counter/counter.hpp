@@ -1,13 +1,13 @@
 #ifndef COUNTER_H
 #define COUNTER_H
 
-#include "../widget/widget.hpp"
+#include "../component/component.hpp"
 
-class Counter : public Widget {
+class Counter : public Component {
 
     public:
-        Counter(Widget* parent, int initValue);
-        asmdom::VNode* render();
+        Counter(Component* parent, int initValue);
+        VNode* render();
 
     private:
         int count;

@@ -2,23 +2,23 @@
 #define BUTTON_H
 
 #include <functional>
-#include "../widget/widget.hpp"
+#include "../component/component.hpp"
 
-class Button : public Widget {
+class Button : public Component {
 
     public:
         Button(
-            Widget* parent,
-            std::string label,
-            std::function<void()> handler
+            Component* parent,
+            string label,
+            function<void()> handler
         );
 
-        void setClickHandler(std::function<void()> handler);
-        asmdom::VNode* render();
+        void setClickHandler(function<void()> handler);
+        VNode* render();
 
     private:
-        std::string label;
-        std::function<void()> handler;
+        string label;
+        function<void()> handler;
 };
 
 

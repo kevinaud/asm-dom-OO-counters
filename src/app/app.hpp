@@ -2,20 +2,18 @@
 #define APP_H
 
 #include <vector>
-#include "../widget/widget.hpp"
+#include "../component/composite-component.hpp"
 
-class App : public Widget {
+class App : public CompositeComponent {
     public:
-        App();
+        App() : CompositeComponent(NULL) {};
 
         void init();
-        asmdom::VNode* render();
-        void addChild(Widget*);
+        VNode* render();
 
         void updateView();
     private:
-        asmdom::VNode* current_view = NULL;
-        std::vector<Widget*> children;
+        VNode* current_view = NULL;
 };
 
 
