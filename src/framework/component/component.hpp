@@ -23,6 +23,10 @@ class Component {
         Component* parent;
 
         virtual Children renderChildren();
+
+        void log(int);
+        void log(string);
+        void log(emscripten::val);
 };
 
 

@@ -10,6 +10,7 @@
 //#include "./app/app.hpp"
 #include "./counter/counter.hpp"
 #include "./button/button.hpp"
+//#include "./framework/input/input.hpp"
 //#include "./change-detector/change-detector.hpp"
 
 using namespace asmdom;
@@ -27,15 +28,23 @@ int main() {
 };
 
 App* buildApp() {
+
+    // create and initialize app
     App* app = new App();
+    app->init();
+
+    // register app with change detector
+    // *MUST BE DONE AFTER App->init()
     ChangeDetector::Instance()->notify(app);
 
     Button* counterBtn = new Button(app, std::string("add counter"), [app] {
         app->add(new Counter(app, 0));
     });
 
-    app->init();
+    Input* input = new Input(app);
+
     app->add(counterBtn);
+    app->add(input);
 
     return app;
 }

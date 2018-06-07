@@ -1,8 +1,8 @@
 #include "./view-property.hpp"
 
-template<typename T>
-void test() {}
+//template<typename T>
 /* ViewProperty<T>& ViewProperty<T>::operator=(const T& newvalue) { */
+
 
 
 /*     this->data = newvalue; */

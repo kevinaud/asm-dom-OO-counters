@@ -17,24 +17,37 @@ class ViewProperty {
             return *this;
         }
 
+        ViewProperty<T>& operator=(const emscripten::val& newvalue) {
+            this->data = newvalue.as<T>();
+            this->changeDetector->viewChanged();
+
+            return *this;
+        }
+
         /* ViewProperty& operator--(const T); */
         /* ViewProperty& operator++(const T); */
-
-        void test();
 
         operator T() const {
             return data; 
         };
 
-        void set(T newValue) {
-            data = newValue;
+        function<bool (emscripten::val)> bind() {
+            return [this](emscripten::val e) -> bool {
+                *this = e;
+                return true;
+            };
         }
 
-        T getVal() {
-            return data; 
+        function<bool (emscripten::val)> bind(
+            function<emscripten::val (emscripten::val)> resolver
+        ) {
+            return [this, resolver](emscripten::val e) -> bool {
+                *this = resolver(e);
+                return true;
+            };
         }
 
-    /* private: */
+    private:
         T data;
         ChangeDetector* changeDetector;
 };
