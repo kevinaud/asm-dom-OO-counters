@@ -1,7 +1,7 @@
 #ifndef COMPONENT_H
 #define COMPONENT_H
 
-#include "../../node_modules/asm-dom/cpp/asm-dom.hpp"
+#include "../../../node_modules/asm-dom/cpp/asm-dom.hpp"
 
 using namespace asmdom;
 using namespace std;
@@ -23,6 +23,10 @@ class Component {
         Component* parent;
 
         virtual Children renderChildren();
+
+        void log(int);
+        void log(string);
+        void log(emscripten::val);
 };
 
 

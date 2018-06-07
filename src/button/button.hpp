@@ -2,7 +2,8 @@
 #define BUTTON_H
 
 #include <functional>
-#include "../component/component.hpp"
+//#include "../component/component.hpp"
+#include "../framework/framework.hpp"
 
 class Button : public Component {
 

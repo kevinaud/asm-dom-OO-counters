@@ -1,7 +1,8 @@
 #include "counter.hpp"
 
 Counter::Counter(Component* parent, int initValue) : Component(parent) {
-    count = initValue;
+    count = new ViewProperty<int>();
+    *count = initValue;
 }
 
 VNode* Counter::render() {
@@ -10,17 +11,16 @@ VNode* Counter::render() {
         <div>
             <a class="button" onclick={[this](emscripten::val e) -> bool {
                 this->decrease(); 
-                updateView();
                 return true;
             }}>
                - 
             </a>
 
-            <span>{{ to_string(this->count) }}</span>
+            <span>{{ to_string(*count) }}</span>
+
 
             <a class="button" onclick={[this](emscripten::val e) -> bool {
                 this->increase(); 
-                updateView();
                 return true;
             }}>
                +
@@ -31,9 +31,9 @@ VNode* Counter::render() {
 }
 
 void Counter::decrease() {
-    count--;
+    *count = *count - 1;
 }
 
 void Counter::increase() {
-    count++;
+    *count = *count + 1;
 }
