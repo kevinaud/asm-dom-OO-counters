@@ -1,7 +1,7 @@
 #ifndef COUNTER_H
 #define COUNTER_H
 
-#include "../component/component.hpp"
+#include "../framework/framework.hpp"
 
 class Counter : public Component {
 
@@ -10,7 +10,7 @@ class Counter : public Component {
         VNode* render();
 
     private:
-        int count;
+        ViewProperty<int>* count;
 
         void decrease();
         void increase();

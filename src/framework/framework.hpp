@@ -1,0 +1,5 @@
+#include "./component/component.hpp"
+#include "./component/composite-component.hpp"
+#include "./app/app.hpp"
+#include "./change-detector/change-detector.hpp"
+#include "./view-property/view-property.hpp"

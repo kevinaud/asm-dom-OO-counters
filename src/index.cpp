@@ -3,11 +3,14 @@
 #include <string>
 #include "../node_modules/asm-dom/cpp/asm-dom.hpp"
 
+// FRAMEWORK
+#include "./framework/framework.hpp"
+
 // APPLICATION HEADERS
-#include "./app/app.hpp"
+//#include "./app/app.hpp"
 #include "./counter/counter.hpp"
 #include "./button/button.hpp"
-#include "./change-detector/change-detector.hpp"
+//#include "./change-detector/change-detector.hpp"
 
 using namespace asmdom;
 

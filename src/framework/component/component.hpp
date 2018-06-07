@@ -1,7 +1,7 @@
 #ifndef COMPONENT_H
 #define COMPONENT_H
 
-#include "../../node_modules/asm-dom/cpp/asm-dom.hpp"
+#include "../../../node_modules/asm-dom/cpp/asm-dom.hpp"
 
 using namespace asmdom;
 using namespace std;
